@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------------------------------------
-# WRITTEN BY: Ruchi Saha
+# WRITTEN BY: Ruchi Saha     ( https://github.com/ruchi09 )
 #
 # PROBLEM STATEMENT: This program implements the CBA (Classification Based
 #                     on Associations) Algorithm

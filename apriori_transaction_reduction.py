@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------------------------------------
-# WRITTEN BY: Ruchi Saha
+# WRITTEN BY: Ruchi Saha   ( https://github.com/ruchi09 )
 #
-# PROBLEM STATEMENT: This program implements the improved apriori using partitioning
+# PROBLEM STATEMENT: This program implements the improved apriori using tranction reduction
 #
 # ------------------------------------------------------------------------------------------------------------------
 
@@ -58,6 +58,16 @@ def readData(file):
 
 
 
+#----------------------------------------------------------------------------------------------------------
+# DESCRIPTION: The function nextFrequent performs cross on the provided itemsets and attempts to create
+#               and find frequent itemsets for next level.
+#
+# PARAMETERS: itemsets -> list of frequent items in prev level (list of tuples)
+#             dataset  -> database (list of tuples)
+#
+# RETURN VALUE: final_it ->  frequent itemsets for next level level (list of tuples)
+#               infreq   -> infrequent itemsets (list of tuples)
+#----------------------------------------------------------------------------------------------------------
 
 
 def nextFrequent(itemsets,dataset):
@@ -89,32 +99,17 @@ def nextFrequent(itemsets,dataset):
 
 
 
-# def nextFrequent_hash(itemsets,i1):
-#     global minSupport
-#     bucket_size = 17
-#     hashtable = [ [] for _ in range(0,bucket_size) ]
-#     frequent = list()
-#     for i in itemsets:
+
+
+
+#----------------------------------------------------------------------------------------------------------
+# DESCRIPTION: removes infrequent patterns from database
 #
-#         for j in range(0, len(i)-1):
-#             for k in range(j+1,len(i)):
+# PARAMETERS: infreq   -> infrequent patterns (list of tuples)
+#             dataset  -> database (list of tuples)
 #
-#                 hash = (i[j]*10 + i[k])%bucket_size
-#                 hashtable[hash].append((i[j],i[k]))
-
-    #
-    #
-    # for i in range(0,bucket_size):
-    #     x = Counter(hashtable[i])
-    #     print "\n\n\n",x
-    #     for a in x.keys():
-    #         print a,"\n\n\n"
-    #         if x[a]>=minSupport:
-    #             frequent.append(a)
-    # return frequent
-
-
-    #dhfiuerg
+# RETURN VALUE: dataset ->  updated dataset (list of tuples)
+#----------------------------------------------------------------------------------------------------------
 
 def updateDatabase(infreq, dataset):
     print "\ninfreq", infreq
@@ -129,6 +124,19 @@ def updateDatabase(infreq, dataset):
 
 
 
+
+
+
+
+
+#----------------------------------------------------------------------------------------------------------
+# DESCRIPTION: Updates the support count of given itemsets over the given database
+#
+# PARAMETERS: items ->  (list of tuples)
+#             dataset  -> database (list of tuples)
+#
+# RETURN VALUE: freq ->  frequent itemsets (list of tuples)
+#----------------------------------------------------------------------------------------------------------
 def updateSupport(items,dataset):
     global minSupport
     freq = list()
@@ -147,6 +155,16 @@ def updateSupport(items,dataset):
 
 
 
+
+
+#----------------------------------------------------------------------------------------------------------
+# DESCRIPTION: Implements optimised apriori algorithm using transaction reduction
+#
+# PARAMETERS: dataset  -> database (list of tuples)
+#
+# RETURN VALUE: items ->  frequent itemsets (list of tuples)
+#----------------------------------------------------------------------------------------------------------
+
 def apriori(dataset):
     global maxItems
     items = list()
@@ -159,7 +177,7 @@ def apriori(dataset):
 
     freq,infreq = updateSupport(freq,dataset)
     # print "\n\n\n initial2: ",freq
-    # if infreq is not NULL:
+
     dataset = updateDatabase(infreq,dataset)
 
     for i in range(2,maxItems):
@@ -172,6 +190,9 @@ def apriori(dataset):
             break
 
     return items
+
+
+
 
 
 
