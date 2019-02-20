@@ -15,6 +15,7 @@ numRules = 0
 minSupport =30  # in percentage
 minConfidence = 15 # in percentage
 datasetSize = 0
+no_of_partition = 2
 
 
 
@@ -123,14 +124,14 @@ def apriori(dataset):
         for j in range(i+1, maxItems+1):
             freq.append((i,j))
 
-    print "\n\n\n initial: ",freq
+    # print "\n\n\n initial: ",freq
 
     freq = updateSupport(freq,dataset)
-    print "\n\n\n initial2: ",freq
+    print "\ninitial freq: ",freq
     for i in range(2,maxItems):
         items = items + freq
         freq = nextFrequent(freq,dataset)
-        print "\n\n\n\nfreq = ", freq
+        print "\n\nfreq = ", freq
 
         if len(freq)<=1:
             break
@@ -153,15 +154,20 @@ def updateSupport(items,dataset):
 if __name__ == "__main__":
     global minSupport
     global datasetSize
+    global no_of_partition
     dataset = readData("dataset.csv")
-    print datasetSize//2
-    minSupport = minSupport*datasetSize/200
-    data1 = dataset[:datasetSize//2]
-    data2 = dataset[datasetSize//2:]
-    print data2
-    item1 = apriori(data1)
-    item2 = apriori(data2)
-    print "\n\n\n\n it",item1,"\n", item2
-    minSupport = minSupport*2
-    final_it=updateSupport(list(set(item1+item2)),dataset)
-    print "\n\n final = ",final_it
+
+
+    minSupport = minSupport*datasetSize/(100 * no_of_partition) #assuming minSupport to be constant for each partition
+
+    local_freq_items = set()
+    for i in range(0,no_of_partition):
+        print "\n\n\n[Partition ",i+1,"]-------------------------------------------------------------------------\n\n\n"
+        data = dataset[i*datasetSize//no_of_partition : (i+1) * datasetSize//no_of_partition]
+        item = apriori(data)
+        local_freq_items = local_freq_items | set(item)
+
+    minSupport = minSupport*no_of_partition
+    final_it=updateSupport(list(local_freq_items),dataset)
+
+    print "\n\n\n------------------------------------------------------------------------------\n\n final = ",final_it,"\n\n"
