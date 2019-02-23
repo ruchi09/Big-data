@@ -14,7 +14,7 @@ import random as r
 
 
 if __name__ =='__main__':
-    f=open("dataset2.csv","w")
+    f=open("dataset.csv","w")
 
     max_items = 5
     max_sequence = 5
