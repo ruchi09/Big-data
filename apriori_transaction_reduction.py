@@ -12,7 +12,7 @@ from collections import Counter
 from itertools import combinations
 maxItems = 0
 numRules = 0
-minSupport =30  # in percentage
+minSupport =40  # in percentage
 minConfidence = 15 # in percentage
 datasetSize = 0
 
@@ -116,7 +116,7 @@ def updateDatabase(infreq, dataset):
     for i in infreq:
         new_dataset = list()
         for d in dataset:
-            if not (set(i).issubset(set(d))):
+            if not (set(i) == (set(d))):
                 new_dataset.append(d)
         dataset = new_dataset
     print "\n\n[updated dataset (length = ",len(dataset),") ]: \n",dataset,"\n\n"
@@ -141,7 +141,7 @@ def updateSupport(items,dataset):
     global minSupport
     freq = list()
     infreq = list()
-    print "\n\n\n\n it", items,"\n",dataset
+    # print "\n\n\n\n it", items,"\n",dataset
     for i in items:
         count =0
         for d in dataset:
@@ -173,14 +173,14 @@ def apriori(dataset):
         for j in range(i+1, maxItems+1):
             freq.append((i,j))
 
-    print "\n\n\n initial: ",freq
+    # print "\n\n\n initial: ",freq
 
     freq,infreq = updateSupport(freq,dataset)
     # print "\n\n\n initial2: ",freq
 
     dataset = updateDatabase(infreq,dataset)
 
-    for i in range(2,maxItems):
+    for i in range(2,maxItems+1):
         items = items + freq
         freq,infreq = nextFrequent(freq,dataset)
         # print "\n\n\n\nfreq = ", freq

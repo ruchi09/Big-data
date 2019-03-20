@@ -101,12 +101,12 @@ def nextFrequent_hash(itemsets,i1):
                 hashtable[hash].append((i[j],i[k]))
 
 
-
+    print "\n\n Hashtable:\n"
     for i in range(0,bucket_size):
         x = Counter(hashtable[i])
-        print "\n\n\n",x
+        print x
         for a in x.keys():
-            print a,"\n\n\n"
+            # print a,"\n\n\n"
             if x[a]>=minSupport:
                 frequent.append(a)
     return frequent

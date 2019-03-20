@@ -533,7 +533,7 @@ def CBA_CB(CAR, dataset):
 if __name__ == "__main__":
     # print "inside main"
     # numRules = 0
-    dataset=readData("itemsets2.csv")
+    dataset=readData("itemsets.csv")
     # print "\n\n\n Dataset:"
     # display(dataset,(10,30,10))
     # print "reio", datasetSize
