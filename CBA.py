@@ -126,7 +126,10 @@ def genInitialRules(dataset):
 
     for i in count1:
         numRules+=1
-        temp = ruleitems(id = numRules,condset = frozenset(i[0]), y=i[1],rulesupCount=count1[i],condsupCount=count2[i[0]] )
+        con = set()
+        con.add(i[0])
+        con = frozenset(con)
+        temp = ruleitems(id = numRules,condset = con, y=i[1],rulesupCount=count1[i],condsupCount=count2[i[0]] )
         # print i,count1[i] #,i[0], i.value(), count2(i.key[0])
         # print temp
         F.add(temp)
