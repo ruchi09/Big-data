@@ -13,5 +13,6 @@ of some well known research papers. This reposirory includes following:
 8. [Equivalence Class LAttice Traversal](./eclat.py)
 9. [MAximal Frequent Itemset Analysis](./mafia.py)
 10. [Pincer Search](./pincer.py)
+11. [Pyspark programs](./pyspark_progs) A collection of basic programs written with pyspark
 
 The [generate_itemsets.py](./generate_itemsets.py) can be used to generate many custom datasets for the given codes.
